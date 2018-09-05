@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <link href="//cdn.bootcss.com/tether/1.3.6/css/tether.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>-->
+    <link rel="stylesheet" href="../css/index.css">
+    <!-- 引入 Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script rel="stylesheet" src="../js/index.js"></script>
+
+
+</head>
+<body background="../image/background.jpg">
+<div class="container">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <!---首页--->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="home">
+                        <div class="col-md-12 column">
+                            <div class="input-group col-md-3" style="margin-top:30px;positon:relative">
+                                <input type="text" class="form-control" placeholder="请输入字段名" id="find_server"/>
+                                <span class="input-group-btn">
+                            <button class="btn btn-info btn-search" style="margin-left:3px" id="find_button">查找</button>
+                                    <script>
+                            var find_button=document.getElementById("find_button");
+                            find_button.onclick=function() {
+                                if ($("#find_server").val()===''){
+                                    alert("请输入您想查询的servername!");
+                                }else {
+                                    $.ajax({
+                                        async:true,
+                                        type:"POST",
+                                        url:"/search",
+                                        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                                        data:{
+                                            servername:$("#find_server").val()
+                                        },
+                                        dataType:"json",
+                                        success:function (data) {
+                                            var html='';
+                                            for (var i=0;i<data.length;i++){
+                                                var ls=data[i];
+                                                html +="<tr class=\"error\">" +
+                                                    "<td></td>" +
+                                                    "<td class=\"servername\">"+ls['servername']+"</td>\n" +
+                                                    "<td class=\"email\">"+ls['email']+"</td>" +
+                                                    "<td class=\"path\">"+ls['path']+"</td>" +
+                                                    "</tr>"
+                                            }
+                                            $(".tbody").html(html);
+                                        },
+                                        error:function () {
+                                            console.log("失败请重试！");
+                                        }
+                                    });
+                                }
+                            }
+                        </script>
+                        </span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 column" id="index">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>
+                                    </th>
+                                    <th>
+                                        Server
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Path
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody class="tbody">
+
+                                </tbody>
+                                <script>
+                                    $(document).ready(function () {
+                                        $.ajax({
+                                            type:"GET",
+                                            url:'/master',
+                                            async:true,
+                                            dataType:'json',
+                                            success:function (data) {
+                                                var html='';
+                                                for (var i=0;i<data.length;i++){
+                                                    var ls=data[i];
+                                                    html +="<tr class=\"error\">" +
+                                                        "<td></td>" +
+                                                        "<td class=\"servername\">"+ls['servername']+"</td>\n" +
+                                                        "<td class=\"email\">"+ls['email']+"</td>" +
+                                                        "<td class=\"path\">"+ls['path']+"</td>" +
+                                                        "</tr>"
+                                                }
+                                                $(".tbody").html(html);
+                                            },
+                                            error:function () {
+                                                console.log("失败请重试！");
+                                            }
+                                        })
+                                    });
+
+                                </script>
+                            </table>
+                            <div class="row clearfix">
+                                <div class="col-md-4 column"></div>
+                                <div class="col-md-4 column" style="text-align: center">
+                                    <ul class="pagination pagination-sm">
+                                        <li>
+                                            <input type="text" id="u_input" style="height:30px;width: 70%;float: left" class="form-control inputPage pageNum" placeholder="请输入页码" autofocus onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                                            <a id="nextpage" class="pageBtn goPage" style="float: left;height: 30px">跳转</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="pagination pagination-sm">
+                                        <li>
+                                            <p style="float:left;margin:5px;text-align: center">共<span class="getPage" id="page">1</span>页</p>
+                                        </li>
+                                    </ul>
+                                    <script>
+                                        var nextpage=document.getElementById("nextpage");
+                                        nextpage.onclick=function () {
+                                            $.ajax({
+                                                async:true,
+                                                type:"POST",
+                                                url:"/nextPage",
+                                                data:{
+                                                    page:$("#u_input").val()
+                                                },
+                                                dataType:"json",
+                                                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                                                success:function (data) {
+                                                    var html='';
+                                                    for (var i=0;i<data.length;i++){
+                                                        var ls=data[i];
+                                                        html +="<tr class=\"error\">" +
+                                                            "<td></td>" +
+                                                            "<td class=\"servername\">"+ls['servername']+"</td>\n" +
+                                                            "<td class=\"email\">"+ls['email']+"</td>" +
+                                                            "<td class=\"path\">"+ls['path']+"</td>" +
+                                                            "</tr>"
+                                                    }
+                                                    $(".tbody").html(html);
+                                                }
+                                            })
+                                        }
+                                    </script>
+                                </div>
+                                <div class="col-md-4 column"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 column"  style="display: none;margin-top: 10px" id="index1">
+                            <div class="path_div"></div>
+                            <script>
+                                var pathname=document.getElementsByClassName('path');
+                                pathname.onclick=function () {
+                                    $.ajax({
+                                        async:true,
+                                        type:"POST",
+                                        url:"/path",
+                                        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                                        data:{
+                                            path:$(".path").val()
+                                        },
+                                        dataType:"json",
+                                        success:function (data) {
+                                            $("#index").hide();
+                                            $("#index1").show();
+                                            var html='';
+                                            var ls=data;
+                                            html+="<div class='path_div'>"+ls;
+                                            $(".path_div").html(html);
+                                        }
+                                    })
+                                }
+                            </script>
+                            <div style="float: right" id="close_div">❌</div>
+                            <script>
+                                var close_div=document.getElementById('close_div');
+                                close_div.onclick=function () {
+                                    $("#index1").hide();
+                                    $("#index").show();
+                                }
+                            </script>
+                        </div>
+                    </div>
+                    <!---我的：已经登陆--->
+                    <div role="tabpanel" class="tab-pane" id="settings">
+                        <div class="col-md-12 column" id="mine" >
+                            <form id="form1" class="form-horizontal" role="form">
+                                <img class="img-circle" style="margin-top: 20px" src="../image/02.jpg" alt="头像"/>
+                                <div class="form-group">
+                                    <label id="login">Email:
+                                        <label id="email2"></label>
+                                        <script>
+                                            var email1=localStorage.getItem("email");
+                                            $("#email2").append(email1);
+                                        </script>
+                                        <br>
+                                        <label id="update">点击此处进行个人信息修改</label>
+                                    </label>
+                                </div>
+                                <h5 class="page-header"></h5>
+                                <div class="col-md-12" style="height: 40px;width: 100%;border-bottom: 1px solid #DCDCDC;font-size: 16px;margin-top: 50px;line-height:20px">
+                                    <div id="myserver">
+                                        <a>我的服务</a>
+                                        <script>
+                                            var my_server=document.getElementById("myserver");
+                                            my_server.onclick=function() {
+                                                $.ajax({
+                                                    async:true,
+                                                    type:"POST",
+                                                    url:"/myService",
+                                                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                                                    data:{
+                                                        email:localStorage.getItem("email")
+                                                    },
+                                                    dataType:"json",
+                                                    success:function () {
+                                                        window.location.href="myserver.html";
+                                                    }
+                                                });
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" style="height: 40px;width: 100%;border-bottom: 1px solid #DCDCDC;font-size: 16px;margin-top: 30px;line-height:20px">
+                                    <div id="myshare">
+                                        <a href="myshare.html">我的收入</a>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul id="mytab" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab">首页</a></li>
+        <li role="presentation"><a href="#settings" role="tab" data-toggle="tab">我的</a></li>
+    </ul>
+</div>
+<!--<script type="text/javascript" src="../js/canvas-nest.js"></script>-->
+<!--<canvas id="c_n1"></canvas>-->
+</body>
+</html>

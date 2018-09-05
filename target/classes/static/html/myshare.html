@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>myshare</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <link href="//cdn.bootcss.com/tether/1.3.6/css/tether.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>-->
+    <link rel="stylesheet" href="../css/index.css">
+    <!-- 引入 Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script rel="stylesheet" src="../js/index.js"></script>
+
+</head>
+<body background="../image/background.jpg">
+<div class="container">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <!---首页--->
+                <div class="tab-content">
+                    <a style="margin-top: 20px;height: 10px;width: 10px" href="index2.html">⬅</a>
+                    <!---我的收入--->
+                    <div role="tabpanel" class="tab-pane active" id="messages">
+                        <div class="col-md-12 column column" id="share">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>
+                                    </th>
+                                    <th>
+                                        Server
+                                    </th>
+                                    <th>
+                                        Share
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody class="mymoney">
+                                <tr class="error" style="background-color: #dff0d8">
+                                    <td>
+                                        1
+                                    </td>
+                                    <td class="servername">
+                                        TB - Monthly
+                                    </td>
+                                    <td class="money">
+                                        Approved
+                                    </td>
+                                </tr>
+                                <tr class="error">
+                                    <td>
+                                        2
+                                    </td>
+                                    <td class="servername">
+                                        TB - Monthly
+                                    </td>
+                                    <td class="money">
+                                        Declined
+                                    </td>
+                                </tr>
+                                <tr class="error" style="background-color: #fcf8e3">
+                                    <td>
+                                        3
+                                    </td>
+                                    <td class="servername">
+                                        TB - Monthly
+                                    </td>
+                                    <td class="money">
+                                        Pending
+                                    </td>
+                                </tr>
+                                <tr class="error">
+                                    <td>
+                                        4
+                                    </td>
+                                    <td class="servername">
+                                        TB - Monthly
+                                    </td>
+                                    <td class="money">
+                                        Call in to confirm
+                                    </td>
+                                </tr>
+                                <tr class="error"  style="background-color: #dff0d8">
+                                    <td>
+                                        5
+                                    </td>
+                                    <td class="servername">
+                                        TB - Monthly
+                                    </td>
+                                    <td class="money">
+                                        Declined
+                                    </td>
+                                </tr>
+                                <tr class="error">
+                                    <td>
+                                        6
+                                    </td>
+                                    <td class="servername">
+                                        TB - Monthly
+                                    </td>
+                                    <td class="money">
+                                        Pending
+                                    </td>
+                                </tr>
+                                <tr class="error" style="background-color: #fcf8e3">
+                                    <td>
+                                        7
+                                    </td>
+                                    <td class="servername">
+                                        TB - Monthly
+                                    </td>
+                                    <td class="money">
+                                        Call in to confirm
+                                    </td>
+                                </tr>
+                                <tr class="error">
+                                    <td>
+                                        8
+                                    </td>
+                                    <td class="servername">
+                                        TB - Monthly
+                                    </td>
+                                    <td class="money">
+                                        Approved
+                                    </td>
+                                </tr>
+                                <tr class="error" style="background-color: #dff0d8">
+                                    <td>
+                                        9
+                                    </td>
+                                    <td class="servername">
+                                        TB - Monthly
+                                    </td>
+                                    <td class="money">
+                                        Declined
+                                    </td>
+                                </tr>
+                                <tr class="error">
+                                    <td>
+                                        10
+                                    </td>
+                                    <td class="servername">
+                                        TB - Monthly
+                                    </td>
+                                    <td class="money">
+                                        Pending
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <script>
+                                    function my_share() {
+                                        $.ajax({
+                                            async:true,
+                                            type:"POST",
+                                            url:"localhost:8080/earn/search",
+                                            data:"uuid="+localStorage.getItem("email"),
+                                            dataType:"json",
+                                            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                                            success:function (data) {
+                                                window.location.href="myshare.html";
+                                                var html='';
+                                                for (var i=0;i<data.length;i++){
+                                                    var ls=data[i];
+                                                    html +="<tr class=\"error\">" +
+                                                        "<td></td>" +
+                                                        "<td class=\"servername\">"+ls['id']+"</td>\n" +
+                                                        "<td class=\"money\">"+ls['money']+"</td>" +
+                                                        "</tr>"
+                                                }
+                                                $("#mymoney").html(html);
+                                            }
+                                        })
+                                    }
+                                </script>
+                            </table>
+                            <div class="row column">
+                                <div class="col-md-4 column">
+                                </div>
+                                <div class="col-md-4 column" style="text-align: center">
+                                    <ul class="pagination pagination-sm">
+                                        <li>
+                                            <a href="#"><</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">2</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">3</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">...</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">n-1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">n</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4 column">
+                                </div>
+                            </div>
+                            <div class="row pull-right">
+                                <div class="col-md-5 ">
+                                </div>
+                                <div class="col-md-5 pull-right">
+                                </div>
+                                <div id="share_all" class="col-md-2 pull-right">
+                                    <label class="pull-right">
+                                        总收入：<label>1234</label>
+                                    </label>
+                                    <input class="pull-right" id="share_button" type="button" value="提现">
+                                    <p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<script type="text/javascript" src="../js/canvas-nest.js"></script>-->
+<!--<canvas id="c_n1"></canvas>-->
+</div>
+</body>
+</html>

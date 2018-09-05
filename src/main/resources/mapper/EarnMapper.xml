@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.serverless.dao.EarnDao">
+    <resultMap id="BaseResultMap" type="org.serverless.pojo.EarnPojo">
+        <result column="id" property="id"/>
+        <result column="email" property="email"/>
+        <result column="server" property="server"/>
+        <result column="uuid" property="uuid"/>
+        <result column="money" property="money"/>
+        <result column="clickNum" property="clickNum"/>
+    </resultMap>
+
+    <parameterMap id="EarnPojo" type="org.serverless.pojo.EarnPojo"/>
+
+    <sql id="Base_Column_List">
+		id,email,uuid,server, money, clickNum
+	</sql>
+
+    <select id="findAllEarn" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from earn
+    </select>
+
+    <select id="findClickNumByUUID" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select
+        clickNum
+        from earn
+        where uuid = #{uuid}
+    </select>
+    <select id="findClickNumByEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from earn
+        where email = #{email}
+    </select>
+
+
+
+    <select id="findByEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from earn where email=#{email}
+    </select>
+
+
+
+    <select id="getNextPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from earn where email=#{email}
+        limit #{start},#{size}
+    </select>
+
+    <!-- where uuid=#{uuid}-->
+
+    <update id="upDateClickNum" parameterType="java.lang.String">
+		update earn set clickNum=clickNum+1,money=money+0.1 where uuid=#{uuid}
+	</update>
+
+    <insert id="addServer" parameterType="org.serverless.pojo.EarnPojo">
+	  insert into earn (email,server,uuid,money,clickNum) values (#{email},#{server},#{uuid},0,0)
+	</insert>
+
+</mapper>

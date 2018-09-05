@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.serverless.dao.ServiceDao">
+	<resultMap id="ServiceResultMap" type="org.serverless.pojo.ServicePojo">
+		<result column="id" property="id"/>
+		<result column="email" property="email" />
+		<result column="uuid" property="uuid" />
+		<result column="servername" property="servername" />
+		<result column="path" property="path"/>
+	</resultMap>
+
+	<parameterMap id="ServicePojo" type="org.serverless.pojo.ServicePojo"/>
+
+	<sql id="Base_Column_List">
+	   id, email, uuid, servername, path
+	</sql>
+
+	<select id="findAllService" resultMap="ServiceResultMap" >
+		select
+		<include refid="Base_Column_List"/>
+		from service
+		limit 1,3
+	</select>
+
+	<select id="findServiceByEmail" parameterType="java.lang.String" resultMap="ServiceResultMap">
+		select
+		<include refid="Base_Column_List"/>
+		from service
+		where email = #{email}
+	</select>
+
+	<select id="findServiceByService" parameterType="java.lang.String" resultMap="ServiceResultMap">
+		select
+		<include refid="Base_Column_List"/>
+		from service
+		where servername like #{servername}
+	</select>
+
+	<select id="findServiceByUUID" parameterType="java.lang.String" resultMap="ServiceResultMap" >
+		select
+		<include refid="Base_Column_List"/>
+		from service
+		where uuid = #{uuid}
+	</select>
+
+	<select id="getNextPage" parameterType="java.util.Map" resultMap="ServiceResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from service
+		limit #{start},#{size}
+	</select>
+
+	<select id="findPathByUUID" parameterType="java.lang.String" resultType="java.lang.String">
+		select
+		<include refid="Base_Column_List"/>
+		from service
+		where uuid = #{uuid}
+	</select>
+
+	<insert id="insertService" parameterMap="ServicePojo">
+		insert into
+		service(email, uuid, servername, path)
+		values
+		(#{email},#{uuid},#{servername},#{path})
+	</insert>
+
+	<update id="updateService" parameterMap="ServicePojo">
+		update
+		service
+		set
+		<if test="path != null">
+			path = #{path}
+		</if>
+		where uuid = #{uuid}
+	</update>
+</mapper>

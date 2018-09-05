@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LogIn</title>
+    <!--[if IE]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/htmleaf-demo.css">
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <script src="../js/login.js"></script>
+</head>
+<body>
+<div class="htmleaf-container">
+    <div class="demo form-bg" style="padding: 20px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                    <form class="form-horizontal">
+                        <span class="heading">用户登录</span>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="inputEmail3" placeholder="电子邮件">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <div class="form-group help">
+                            <input type="password" class="form-control" id="inputPassword3" placeholder="密　码">
+                            <i class="fa fa-lock"></i>
+                            <a href="#" class="fa fa-question-circle"></a>
+                        </div>
+                        <div class="form-group">
+                            <div class="main-checkbox">
+                                <input type="checkbox" value="None" id="checkbox1" name="check"/>
+                                <label for="checkbox1"></label>
+                            </div>
+                            <span class="text">Remember me</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="button" class="btn btn-info btn-block" value="登陆" id="button_click">
+                            <script>
+                                var button_click=document.getElementById("button_click");
+                                button_click.onclick=function() {
+                                    var temp = document.getElementById("inputEmail3");
+                                    //对电子邮件的验证
+                                    var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+                                    if(!myreg.test(temp.value))
+                                    {
+                                        alert('请输入有效的Email！');
+                                        myreg.focus();
+                                        return false;
+                                    }else {
+                                        $.ajax({
+                                            async:true,
+                                            type:"POST",
+                                            url:"/login",
+                                            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                                            data:{
+                                                email:$("#inputEmail3").val(),
+                                                passwd:$("#inputPassword3").val()
+                                            },
+                                            dataType:"json",
+                                            success:function () {
+                                                var emailname=$("#inputEmail3").val();
+                                                localStorage.setItem("email",emailname);
+                                                window.location.href="index2.html";
+                                            }
+                                        })
+                                    }
+                                };
+                            </script>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

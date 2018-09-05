@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <link href="//cdn.bootcss.com/tether/1.3.6/css/tether.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>-->
+    <link rel="stylesheet" href="../css/index.css">
+    <!-- 引入 Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script rel="stylesheet" src="../js/index.js"></script>
+
+
+</head>
+<body background="../image/background.jpg">
+<div class="container">
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+<!---首页--->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="home">
+                    <div class="col-md-12 column">
+                    <div class="input-group col-md-3" style="margin-top:30px;positon:relative">
+                        <input type="text" class="form-control" placeholder="请输入字段名" id="find_server"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-info btn-search" style="margin-left:3px" onclick="f_ind()">查找</button>
+                        </span>
+                    </div>
+                    </div>
+                    <div class="col-md-12 column" id="index">
+                        <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>
+                            </th>
+                            <th>
+                                Server
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Path
+                            </th>
+                        </tr>
+                        </thead>
+                            <tbody class="tbody">
+
+                            </tbody>
+                    </table>
+                        <div class="row clearfix">
+                            <div class="col-md-4 column"></div>
+                            <div class="col-md-4 column" style="text-align: center">
+                            <ul class="pagination pagination-sm">
+                                <li>
+                                    <a href="#"><</a>
+                                </li>
+                                <li>
+                                    <a href="#">1</a>
+                                </li>
+                                <li>
+                                    <a href="#">2</a>
+                                </li>
+                                <li>
+                                    <a href="#">3</a>
+                                </li>
+                                <li>
+                                    <a href="#">...</a>
+                                </li>
+                                <li>
+                                    <a href="#">n-1</a>
+                                </li>
+                                <li>
+                                    <a href="#">n</a>
+                                </li>
+                                <li>
+                                    <a href="#">></a>
+                                </li>
+                            </ul>
+                        </div>
+                            <div class="col-md-4 column"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 column"  style="display: none;margin-top: 10px" id="index1">
+                        <div class="path_div"></div>
+                        <div style="float: right" onclick="close_div()">❌</div>
+                    </div>
+                </div>
+<!---我的--->
+                <div role="tabpanel" class="tab-pane" id="settings">
+                    <div class="col-md-12 column" id="mine" >
+                        <form id="form1" class="form-horizontal" role="form">
+                            <img class="img-circle" style="margin-top: 20px" src="../image/02.jpg" alt="头像"/>
+                            <div class="form-group">
+                                <label id="login"><a href="login.html">点击此处登陆</a></label>
+                            </div>
+                            <h5 class="page-header"></h5>
+                            <div class="col-md-12" style="height: 40px;width: 100%;border-bottom: 1px solid #DCDCDC;font-size: 16px;margin-top: 50px;line-height:20px">
+                                <div>
+                                    <a onclick="myserver()">我的服务</a>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="height: 40px;width: 100%;border-bottom: 1px solid #DCDCDC;font-size: 16px;margin-top: 30px;line-height:20px">
+                                <div>
+                                    <a href="login.html">我的收入</a>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <ul id="mytab" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab">首页</a></li>
+        <li role="presentation"><a href="#settings" role="tab" data-toggle="tab">我的</a></li>
+    </ul>
+</div>
+<!--<script type="text/javascript" src="../js/canvas-nest.js"></script>-->
+<!--<canvas id="c_n1"></canvas>-->
+</body>
+</html>
